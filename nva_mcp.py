@@ -155,4 +155,13 @@ async def search_raw(
 
 
 if __name__ == "__main__":
-    mcp.run()
+    import os
+
+    # Render (og lignende tjenester) gir oss et portnummer via PORT-variabelen,
+    # og serveren må svare på adressen 0.0.0.0. Vi bruker "http"-transport slik
+    # at serveren blir tilgjengelig på en nettadresse (på stien /mcp).
+    mcp.run(
+        transport="http",
+        host="0.0.0.0",
+        port=int(os.environ.get("PORT", 8000)),
+    )
